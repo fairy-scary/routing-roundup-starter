@@ -7,7 +7,7 @@ const app = express();
 app.set('view engine', 'pug');
 
 app.get('/about', (req, res) => {
-    res.render('layout', {method: req.method, path: req.path, randNum: 42}); 
+    res.render('layout', {method: req.method, path: req.path, randNum: Math.random()}); 
 })
 
 app.get("/capital-letters/:id", (req, res) => {
@@ -15,6 +15,7 @@ app.get("/capital-letters/:id", (req, res) => {
 });
 
 app.use('/margot', routeFile);
+app.use('/margeaux', routeFile);
 
 app.get('/*xyz', (req, res) => {
     res.send("That's all I wrote.");
