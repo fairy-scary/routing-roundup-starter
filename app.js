@@ -1,4 +1,6 @@
+
 const express = require ('express');
+const routeFile = require('./route.js');
 
 const app = express();
 
@@ -12,8 +14,9 @@ app.get("/capital-letters/:id", (req, res) => {
   res.send(`${req.params.id}`.toUpperCase());
 });
 
+app.use('/margot', routeFile);
+
 app.get('/*xyz', (req, res) => {
-  //  res.render('layout', {method: req.method, path: req.path, randNum: 42});
     res.send("That's all I wrote.");
 })
 
@@ -24,4 +27,4 @@ app.get('/', (req, res) => {
 
 const port = 8081
 
-app.listen(port, () => console.log(`Listning on ${port}...`))
+app.listen(port, () => console.log(`Listning on ${port}...`));.
