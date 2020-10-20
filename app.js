@@ -6,9 +6,7 @@ const app = express();
 
 app.set('view engine', 'pug');
 
-app.get('/about', (req, res) => {
-    res.render('layout', {method: req.method, path: req.path, randNum: Math.random()}); 
-})
+
 
 app.get("/capital-letters/:id", (req, res) => {
   res.send(`${req.params.id}`.toUpperCase());
@@ -17,7 +15,7 @@ app.get("/capital-letters/:id", (req, res) => {
 app.use('/margot', routeFile);
 app.use('/margeaux', routeFile);
 
-app.get('/*xyz', (req, res) => {
+app.get( '/*xyz', (req, res) => {
     res.send("That's all I wrote.");
 })
 
@@ -25,6 +23,15 @@ app.get('/', (req, res) => {
     res.send("Hello from Express!");
 
 })
+
+//app.all("(/about)|(/about[^x-z])|(/foo)", (req, res) => {
+    app.all( /^\/[a-z(0-9)A-Z\-_]*$/, (req, res) => {
+      res.render("layout", {
+        method: req.method,
+        path: req.path,
+        randomNum: Math.floor(Math.random() * 100),
+      });
+    });
 
 const port = 8081
 
